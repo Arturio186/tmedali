@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.login')
 
 @section('title', 'Вход')
 
@@ -6,7 +6,11 @@
 
 <div class="login">
 
-    <form method="POST" class="login-form">
+    <form
+        method="POST"
+        action="{{ route('admin.login') }}"
+        class="login-form"
+    >
 
         @csrf
 
