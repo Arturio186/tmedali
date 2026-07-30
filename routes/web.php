@@ -2,4 +2,48 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home');
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\PartnerController;
+
+Route::view('/', 'pages.home')->name('home');
+Route::view('/about', 'pages.about')->name('about');
+
+Route::get('/catalog', [CatalogController::class, 'index'])
+    ->name('catalog');
+Route::get('/partners', [PartnerController::class, 'index'])
+    ->name('partners');
+
+Route::view('/prices', 'pages.prices')->name('prices');
+Route::view('/works', 'pages.works')->name('works');
+
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
+
+Route::prefix('admin')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [AuthController::class, 'login'])->name('admin.login');
+        Route::post('/login', [AuthController::class, 'authenticate']);
+    });
+
+    Route::middleware('auth')->group(function () {
+      Route::get('/', DashboardController::class)
+        ->name('admin.dashboard');
+
+      Route::resource('products', ProductController::class)
+        ->except(['show'])
+        ->names('admin.products');
+
+      Route::resource('partners', App\Http\Controllers\Admin\PartnerController::class)
+        ->except(['show'])
+        ->names('admin.partners');
+
+      Route::resource('requests', RequestController::class)
+          ->only(['index', 'show', 'destroy'])
+          ->names('admin.requests');
+
+      Route::post('/logout', [AuthController::class, 'logout'])
+          ->name('admin.logout');
+    });
+
+});

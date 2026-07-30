@@ -28,6 +28,10 @@ a {
   text-decoration: none;
 }
 
+#logo {
+  width: 140px;
+}
+
 .button {
   width: 308px;
   padding: 16px 0;
@@ -157,7 +161,6 @@ header {
 
 .about {
   padding: 130px 40px;
-  padding-bottom: 0;
 }
 
 .about .content {
@@ -215,7 +218,7 @@ header {
 
 .catalog {
   padding: 130px 40px;
-  padding-bottom: 0;
+  padding-top: 0;
 }
 
 .catalog .title {
@@ -266,7 +269,7 @@ header {
 
 .prices {
   padding: 130px 40px;
-  padding-bottom: 0;
+  padding-top: 0;
 }
 
 .prices .title {
@@ -373,7 +376,7 @@ header {
 
 .works {
   padding: 130px 40px;
-  padding-bottom: 0;
+  padding-top: 0;
 }
 
 .works .title {
@@ -425,26 +428,68 @@ header {
 }
 
 /* ---------- PARTNERS ---------- */
-
 .partners {
-  padding: 130px 40px;
-  padding-bottom: 0;
+    padding: 80px 40px;
+    padding-top: 0;
 }
+
 
 .partners .title {
-  margin-bottom: 50px;
+    margin-bottom: 50px;
 }
+
 
 .partners .logos {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 40px;
+    display: grid;
 
-  margin-bottom: 130px;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 40px;
+
+    margin-bottom: 130px;
 }
 
-.partners .logos img {
-  height: 120px;
+
+.partners .partner {
+    height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    border: 1px solid #e5e7eb;
+
+    transition: .25s;
+
+    text-decoration: none;
+}
+
+
+.partners .partner:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+}
+
+
+.partners .partner img {
+    max-width: 100%;
+    max-height: 120px;
+
+    object-fit: contain;
+
+    transition: .25s;
+}
+
+
+.partners .partner:hover img {
+    transform: scale(1.05);
 }
 
 /* ---------- FOOTER ---------- */
@@ -605,6 +650,10 @@ footer .down .right {
 
 .attach {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .attach label {
@@ -614,6 +663,14 @@ footer .down .right {
   display: inline-block;
   padding-bottom: 2px;
   font-size: 18px;
+}
+
+#fileName {
+  color: #fff;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bottom {
@@ -649,6 +706,7 @@ footer .down .right {
   transform: translateY(-2px);
 }
 
-.mob-menu, .mob-content {
+.mob-menu,
+.mob-content {
   display: none;
 }
