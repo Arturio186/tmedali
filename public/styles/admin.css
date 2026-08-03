@@ -454,3 +454,47 @@ main {
 
     color: #9ca3af;
 }
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table th,
+.table td {
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    vertical-align: top;
+}
+
+.table th {
+    background: #f8f8f8;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.danger-button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #d93025;
+    color: #fff;
+    cursor: pointer;
+}
+
+.danger-button:hover {
+    background: #b3261e;
+}

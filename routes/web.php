@@ -13,12 +13,15 @@ Route::get('/catalog', [CatalogController::class, 'index'])
 Route::get('/partners', [PartnerController::class, 'index'])
     ->name('partners');
 
+Route::post('/requests', [App\Http\Controllers\RequestController::class, 'store'])->name('requests.store');
+
 Route::view('/prices', 'pages.prices')->name('prices');
 Route::view('/works', 'pages.works')->name('works');
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\RequestController;
 
 Route::prefix('admin')->group(function () {
     Route::middleware('guest')->group(function () {
@@ -27,23 +30,28 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::middleware('auth')->group(function () {
-      Route::get('/', DashboardController::class)
-        ->name('admin.dashboard');
+        Route::get('/', DashboardController::class)
+            ->name('admin.dashboard');
 
-      Route::resource('products', ProductController::class)
-        ->except(['show'])
-        ->names('admin.products');
+        Route::resource('products', ProductController::class)
+            ->except(['show'])
+            ->names('admin.products');
 
-      Route::resource('partners', App\Http\Controllers\Admin\PartnerController::class)
-        ->except(['show'])
-        ->names('admin.partners');
+        Route::resource('partners', App\Http\Controllers\Admin\PartnerController::class)
+            ->except(['show'])
+            ->names('admin.partners');
 
-      Route::resource('requests', RequestController::class)
-          ->only(['index', 'show', 'destroy'])
-          ->names('admin.requests');
+        Route::resource('requests', RequestController::class)
+            ->only(['index', 'destroy'])
+            ->names('admin.requests');
 
-      Route::post('/logout', [AuthController::class, 'logout'])
-          ->name('admin.logout');
+        Route::get(
+            'requests/{request}/download',
+            [RequestController::class, 'download']
+        )->name('admin.requests.download');
+
+        Route::post('/logout', [AuthController::class, 'logout'])
+            ->name('admin.logout');
     });
 
 });
