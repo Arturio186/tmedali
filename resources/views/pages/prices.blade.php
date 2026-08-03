@@ -117,7 +117,7 @@
 @media (max-width:768px) {
 
     .prices {
-        padding: 80px 20px 0;
+        padding: 80px 20px;
     }
 
     .prices .title {
