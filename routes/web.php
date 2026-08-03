@@ -5,18 +5,32 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\PartnerController;
 
-Route::view('/', 'pages.home')->name('home');
-Route::view('/about', 'pages.about')->name('about');
+Route::view('/', 'pages.home')
+    ->middleware('track.page.views')
+    ->name('home');
+
+Route::view('/about', 'pages.about')
+    ->middleware('track.page.views')
+    ->name('about');
 
 Route::get('/catalog', [CatalogController::class, 'index'])
+    ->middleware('track.page.views')
     ->name('catalog');
+
 Route::get('/partners', [PartnerController::class, 'index'])
+    ->middleware('track.page.views')
     ->name('partners');
 
-Route::post('/requests', [App\Http\Controllers\RequestController::class, 'store'])->name('requests.store');
+Route::post('/requests', [App\Http\Controllers\RequestController::class, 'store'])
+    ->name('requests.store');
 
-Route::view('/prices', 'pages.prices')->name('prices');
-Route::view('/works', 'pages.works')->name('works');
+Route::view('/prices', 'pages.prices')
+    ->middleware('track.page.views')
+    ->name('prices');
+
+Route::view('/works', 'pages.works')
+    ->middleware('track.page.views')
+    ->name('works');
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
